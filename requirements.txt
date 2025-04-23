@@ -2,5 +2,5 @@ streamlit==1.18.0
 ultralytics==8.0.0
 opencv-python-headless==4.8.0.76
 pillow==9.3.0
-numpy==1.23.1
+numpy==1.23.5  # Asegúrate de que numpy sea compatible con OpenCV
 pandas==1.5.0
