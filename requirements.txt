@@ -4,4 +4,4 @@ opencv-python-headless==4.5.3.56
 pillow==9.0.0
 numpy==1.24.0
 pandas==1.5.0
-torch==2.1.0+cpu
+torch==2.1.0  # Versión estándar de PyTorch sin el sufijo +cpu
