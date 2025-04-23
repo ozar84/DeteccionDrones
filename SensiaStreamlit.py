@@ -61,9 +61,21 @@ st.markdown(f"""
 @st.cache_resource
 def load_model():
     try:
-        return YOLO(MODEL_PATH)
+        # Intentar cargar el modelo directamente con la ruta
+        model = YOLO(MODEL_PATH)
+        return model
     except Exception as e:
+        # En caso de error, intentar cargar el modelo con pesos_only=False si es un error de deserialización
         st.error(f"❌ Error cargando el modelo: {e}")
+        if "WeightsUnpickler" in str(e):
+            try:
+                # Intentar cargar con weights_only=False
+                st.warning("⚠️ Intentando cargar el modelo con 'weights_only=False'.")
+                model = torch.load(MODEL_PATH, weights_only=False)
+                return model
+            except Exception as e2:
+                st.error(f"❌ Error al cargar el modelo con 'weights_only=False': {e2}")
+                return None
         return None
 
 # Carga de imagen
