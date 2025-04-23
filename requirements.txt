@@ -1,7 +1,7 @@
-streamlit==1.16.0
-ultralytics==8.0.35  # O la versión más reciente que esté disponible y sea compatible
-opencv-python-headless==4.8.0.76
-pillow==8.0.0  # Versión recomendada o la más reciente
-numpy==1.23.0  # O la versión que mejor se adapte a tu entorno
-pandas==1.5.0  # Similar a las demás dependencias
+streamlit
+ultralytics
+opencv-python-headless==4.8.0.72
+pillow
+numpy
+pandas
 
