@@ -58,11 +58,10 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Cargar modelo
-@st.cache_resource(show_spinner=False)
+@st.cache_resource
 def load_model():
     try:
-        model = YOLO(MODEL_PATH)  # Cambia MODEL_PATH por la ruta de tu modelo
-        return model
+        return YOLO(MODEL_PATH)
     except Exception as e:
         st.error(f"❌ Error cargando el modelo: {e}")
         return None
