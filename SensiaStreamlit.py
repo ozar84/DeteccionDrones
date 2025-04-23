@@ -10,9 +10,9 @@ from io import BytesIO
 st.set_page_config(page_title="Detección de Drones", page_icon="🛸", layout="wide")
 
 # Ruta al modelo y a los logos
-MODEL_PATH = "C:/Users/alber/OneDrive/Escritorio/best.pt"
-SENSIA_LOGO = "C:/Users/alber/OneDrive/Escritorio/Sensia.png"
-MBIT_LOGO = "C:/Users/alber/OneDrive/Escritorio/mbit.jpg"
+MODEL_PATH = "best.pt"
+SENSIA_LOGO = "Sensia.png"
+MBIT_LOGO = "mbit.jpg"
 
 # Función para convertir imagen a base64
 def image_to_base64(path, width=140, height=60):
