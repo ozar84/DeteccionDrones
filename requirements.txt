@@ -1,6 +1,6 @@
-streamlit
-ultralytics
+streamlit==1.18.0
+ultralytics==8.0.0  # o la versión que estás utilizando
 opencv-python-headless==4.8.0.76
-pillow
-numpy
-pandas
+pillow==9.3.0
+numpy==1.23.1
+pandas==1.5.0
