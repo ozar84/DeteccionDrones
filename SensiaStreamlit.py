@@ -58,25 +58,30 @@ st.markdown(f"""
 """, unsafe_allow_html=True)
 
 # Cargar modelo
-@st.cache_resource
+@st.cache_resource(show_spinner=False)
 def load_model():
     try:
-        # Intentar cargar el modelo directamente con la ruta
+        # Intentar cargar el modelo con YOLO
         model = YOLO(MODEL_PATH)
+        st.success("✅ Modelo cargado exitosamente.")
         return model
     except Exception as e:
-        # En caso de error, intentar cargar el modelo con pesos_only=False si es un error de deserialización
-        st.error(f"❌ Error cargando el modelo: {e}")
+        # Mostrar error si falla la carga
+        st.error(f"❌ Error cargando el modelo con YOLO: {e}")
+        
+        # Si el error está relacionado con la deserialización de los pesos
         if "WeightsUnpickler" in str(e):
             try:
-                # Intentar cargar con weights_only=False
                 st.warning("⚠️ Intentando cargar el modelo con 'weights_only=False'.")
-                model = torch.load(MODEL_PATH, weights_only=False)
+                model = torch.load(MODEL_PATH, map_location=torch.device('cpu'), weights_only=False)
+                st.success("✅ Modelo cargado con 'weights_only=False'.")
                 return model
             except Exception as e2:
                 st.error(f"❌ Error al cargar el modelo con 'weights_only=False': {e2}")
                 return None
-        return None
+        else:
+            # Si no es un error relacionado con WeightsUnpickler, simplemente devolvemos None
+            return None
 
 # Carga de imagen
 st.markdown("### 📷 Sube una imagen para analizar si hay presencia de drones")
