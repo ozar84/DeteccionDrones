@@ -77,7 +77,8 @@ if uploaded_file:
     with st.spinner("🔍 Analizando imagen..."):
         model = load_model()
         if model:
-            results = model(image_np, imgsz=640)
+            # Filtrar detecciones con confianza > 70%
+            results = model(image_np, imgsz=640, conf=0.7)
             result = results[0]
             boxes = result.boxes
 
@@ -97,7 +98,7 @@ if uploaded_file:
 
             st.markdown("## 📊 Resultados de la Detección")
             if len(df) > 0:
-                st.success("✅ Se han detectado objetos en la imagen.")
+                st.success(f"✅ Se han detectado {len(df)} objeto(s) con confianza > 70%.")
                 st.dataframe(df, use_container_width=True)
 
                 annotated_img = result.plot()
@@ -109,9 +110,8 @@ if uploaded_file:
                 with col2:
                     st.image(annotated_img, caption="Detección YOLOv8", use_container_width=True)
             else:
-                st.warning("⚠️ No se han detectado drones en la imagen.")
-                
-                # Mostrar la imagen original incluso si no se detectaron drones
+                st.warning("⚠️ No se han detectado drones con confianza superior al 70%.")
+
                 st.markdown("### 🖼 Comparativa: Original vs. Detectado")
                 col1, col2 = st.columns(2)
                 with col1:
