@@ -98,7 +98,7 @@ if uploaded_file:
 
             st.markdown("## 📊 Resultados de la Detección")
             if len(df) > 0:
-                st.success(f"✅ Se han detectado {len(df)} objeto(s) con confianza > 70%.")
+                st.success(f"✅ Se han detectado {len(df)} objeto(s) en la imagen")
                 st.dataframe(df, use_container_width=True)
 
                 annotated_img = result.plot()
@@ -110,7 +110,7 @@ if uploaded_file:
                 with col2:
                     st.image(annotated_img, caption="Detección YOLOv8", use_container_width=True)
             else:
-                st.warning("⚠️ No se han detectado drones con confianza superior al 70%.")
+                st.warning("⚠️ No se han detectado drones en la imagen")
 
                 st.markdown("### 🖼 Comparativa: Original vs. Detectado")
                 col1, col2 = st.columns(2)
